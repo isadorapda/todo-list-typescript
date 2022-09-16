@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { v4 as uuid } from 'uuid'
+import { InputField } from './components/InputField'
+import { Task } from './types/model'
+import './App.css'
+import { TaskList } from './components/TaskList/TaskList'
 
-function App() {
+const App: React.FC = () => {
+  const [tasks, setTasks] = React.useState<Task[]>([])
+  const [task, setTask] = React.useState<string>('')
+
+  function addTask(e: any) {
+    e.preventDefault()
+    setTasks([...tasks, { title: task, id: uuid(), isDone: false }])
+    setTask('')
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Todo List</h1>
+      <InputField addTask={addTask} task={task} setTask={setTask} />
+      <TaskList tasks={tasks} setTasks={setTasks} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
