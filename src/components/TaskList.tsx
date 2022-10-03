@@ -1,6 +1,13 @@
 import React from 'react'
-import { Task } from '../../types/model'
-import { SingleTask } from '../taskItem/SingleTask'
+import styled from 'styled-components'
+import { Task } from '../types/model'
+import { SingleTask } from './SingleTask'
+
+const TaskListContainer = styled.div`
+  width: 100%;
+  max-height: 70%;
+  overflow: auto;
+`
 
 type Props = {
   tasks: Task[]
@@ -8,7 +15,7 @@ type Props = {
 }
 export const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
   return (
-    <div>
+    <TaskListContainer>
       {tasks.map((task) => (
         <SingleTask
           task={task}
@@ -17,6 +24,6 @@ export const TaskList: React.FC<Props> = ({ tasks, setTasks }) => {
           tasks={tasks}
         />
       ))}
-    </div>
+    </TaskListContainer>
   )
 }
